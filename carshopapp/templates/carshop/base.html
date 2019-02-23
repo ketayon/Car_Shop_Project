@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Carshop{% endblock %}
+
+{% url 'carshop-car' as carshop_car_url %}
+{% url 'carshop-account' as carshop_account_url %}
+
+{% block sidebar %}
+  <div class="text-center">
+    <img class="image-circle" src="{{ MEDIA_URL }}{{ request.user.carshop.logo }}" width="70" height="70">
+    <br>
+    <br>
+    <h6>Приветствую, {{ request.user.get_full_name }}</h6>
+    <h5>{{ request.user.carshop.name }}</h5>
+  </div>
+
+  <div class="list-group">
+    <span class="text-uppercase">Панель</span>
+    <a href="{% url 'carshop-car' %}"
+    class="list-group-item {% if request.path == carshop_car_url %} active {% endif %}">Cars</a>
+
+    <span class="text-uppercase">Профиль</span>
+    <a href="{% url 'carshop-account' %}"
+    class="list-group-item {% if request.path == carshop_account_url %} active {% endif %}">Профиль</a>
+  </div>
+
+  <div class="text-center">
+    <a href="{% url 'carshop-sign-out' %}?next={{ request.path }}" class="btn btn-red">Выход</a>
+  </div>
+{% endblock %}

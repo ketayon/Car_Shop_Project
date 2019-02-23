@@ -1,0 +1,47 @@
+{% extends 'carshop/base.html' %}
+
+{% block page %}
+<div class="card">
+  <div class="card-header bg-ruby">
+    <h4 class="card-title text-center text-white">
+      Cars
+    </h4>
+  </div>
+  <div class="card-body">
+    <div class="text-right">
+      <a href="{% url 'carshop-add-car' %}" class="btn btn-red">Add car</a>
+      <br>
+      <br>
+    </div>
+    <table class="table table-bordered table-hover table-striped">
+      <thead>
+        <tr class="bg-danger text-white text-center">
+          <th>ID</th>
+          <th>Марка</th>
+          <th>Модель</th>
+          <th>Категория</th>
+          <th>Имя владельца</th>
+          <th>Год выпуска</th>
+          <th>Цена</th>
+          <th>Изображение</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in cars %}
+          <tr>
+            <td scope="row">{{ car.id }}</td>
+            <td><a href="{% url 'carshop-edit-car' car.id %}">{{ car.name }}</a></td>
+            <td><a href="#">{{ car.model }}</a></td>
+            <td><a href="#">{{ car.category }}</a></td>
+            <td><a href="#">{{ car.owner_name }}</a></td>
+            <td><a href="#">{{ car.year_issue }}</a></td>
+            <td>{{ car.price }}</td>
+            <td class="text-center"><img class="rounded"
+              src="{{ MEDIA_URL }}{{ car.image }}" width="50" height="50"></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
